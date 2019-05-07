@@ -11,7 +11,14 @@ request.get('https://sytantris.github.io/http-examples/future.jpg')             
        .on('error', function (err) {                                             // Note 2
          throw err; 
        })
-       .on('response', function (response) {                           // Note 3
-         console.log('Response Status Code: ', response.statusCode + ", Response Status Message: ", response.statusMessage + response.headers["content-type"]);
+       .on('response', function (response) {                                    // Note 3
+        console.log('Hold on, I am Downloading the image...');
+        console.log('Response Status Code: ', response.statusCode + ", Response Status Message: ", response.statusMessage + response.headers["content-type"]);
+        
        })
-       .pipe(fs.createWriteStream('./downloaded.html'));               // Note 4
+       .on('end', function(){
+           console.log("Ok, I got it!")
+       })
+
+       
+       .pipe(fs.createWriteStream('./downloaded.html'));                         // Note 4
